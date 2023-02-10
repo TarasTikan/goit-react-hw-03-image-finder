@@ -5,7 +5,7 @@ import { ImageGallery } from './ImageGallery/ImageGallery';
 export class App extends Component {
   state = {
     page: 1,
-    query: null,
+    query: '',
     items: []
   }
 
