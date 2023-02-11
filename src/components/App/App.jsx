@@ -55,7 +55,10 @@ export class App extends Component {
           onSubmit={this.handleSubmitImg}
         />
 
-        <ImageGallery items={this.state.items} handleModal={this.toggleModal}></ImageGallery>
+        <ImageGallery
+          items={this.state.items}
+          handleModal={this.toggleModal}
+        ></ImageGallery>
         {this.state.items.length !== 0 && (
           <Button onClick={this.handleLoadMoreBtn} />
         )}
