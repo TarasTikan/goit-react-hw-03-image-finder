@@ -13,32 +13,27 @@ export class App extends Component {
     loading: false,
   };
   componentDidUpdate(prevProps, prevState) {
-    if ((prevState.query !== this.state.query) ||(prevState.page !== this.state.page)) {
+    if (
+      prevState.query !== this.state.query ||
+      prevState.page !== this.state.page
+    ) {
       this.setState({ loading: true });
 
       FetchImg(this.state.query, this.state.page)
-      .then(({ hits }) =>
-      this.setState(prevState => ({
-        items: [...prevState.items, ...hits],
-      }))
-    )
+        .then(({ hits }) =>
+          this.setState(prevState => ({
+            items: [...prevState.items, ...hits],
+          }))
+        )
         .finally(() => this.setState({ loading: false }));
     }
   }
 
   handleLoadMoreBtn = e => {
-    this.setState({ loading: true });
-    e.target.style.display = 'none';
-
-        this.setState(prevState => ({
-          // items: [...prevState.items, ...hits],
-          page: prevState.page + 1,
-        }))
-        e.target.style.display = 'block';
-      // .finally(() => {
-      //   this.setState({ loading: false });
-      //   e.target.style.display = 'block';
-      // });
+    this.setState(prevState => ({
+      page: prevState.page + 1,
+      loading: true,
+    }));
   };
   handleSubmitImg = query => {
     this.setState({
@@ -56,15 +51,14 @@ export class App extends Component {
           query={this.state.query}
           onSubmit={this.handleSubmitImg}
         />
-
         <ImageGallery
           items={this.state.items}
           handleModal={this.toggleModal}
         ></ImageGallery>
+        {this.state.loading && <Loader />}
         {this.state.items.length !== 0 && (
           <Button onClick={this.handleLoadMoreBtn} />
         )}
-        {this.state.loading && <Loader />}
       </Apps>
     );
   }
