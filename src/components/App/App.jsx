@@ -13,13 +13,14 @@ export class App extends Component {
     loading: false,
   };
   componentDidUpdate(prevProps, prevState) {
+    const {query, page} = this.state
     if (
-      prevState.query !== this.state.query ||
-      prevState.page !== this.state.page
+      prevState.query !== query ||
+      prevState.page !== page
     ) {
       this.setState({ loading: true });
 
-      FetchImg(this.state.query, this.state.page)
+      FetchImg(query, page)
         .then(({ hits }) =>
           this.setState(prevState => ({
             items: [...prevState.items, ...hits],
@@ -44,19 +45,20 @@ export class App extends Component {
   };
 
   render() {
+    const {page, query, items, loading} = this.state
     return (
       <Apps>
         <Searchbar
-          page={this.state.page}
-          query={this.state.query}
+          page={page}
+          query={query}
           onSubmit={this.handleSubmitImg}
         />
         <ImageGallery
-          items={this.state.items}
+          items={items}
           handleModal={this.toggleModal}
         ></ImageGallery>
-        {this.state.loading && <Loader />}
-        {this.state.items.length !== 0 && (
+        {loading && <Loader />}
+        {items.length !== 0 && (
           <Button onClick={this.handleLoadMoreBtn} />
         )}
       </Apps>
