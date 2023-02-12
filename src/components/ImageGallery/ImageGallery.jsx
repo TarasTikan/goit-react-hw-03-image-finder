@@ -13,6 +13,6 @@ export function ImageGallery({ items }) {
 }
 ImageGallery.propTypes = {
   items: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
   }).isRequired,
 };

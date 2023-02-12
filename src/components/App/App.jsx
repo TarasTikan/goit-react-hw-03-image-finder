@@ -13,11 +13,15 @@ export class App extends Component {
     loading: false,
   };
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.query !== this.state.query) {
+    if ((prevState.query !== this.state.query) ||(prevState.page !== this.state.page)) {
       this.setState({ loading: true });
 
       FetchImg(this.state.query, this.state.page)
-        .then(({ hits }) => this.setState({ items: hits }))
+      .then(({ hits }) =>
+      this.setState(prevState => ({
+        items: [...prevState.items, ...hits],
+      }))
+    )
         .finally(() => this.setState({ loading: false }));
     }
   }
@@ -26,17 +30,15 @@ export class App extends Component {
     this.setState({ loading: true });
     e.target.style.display = 'none';
 
-    FetchImg(this.state.query, this.state.page + 1)
-      .then(({ hits }) =>
         this.setState(prevState => ({
-          items: [...prevState.items, ...hits],
+          // items: [...prevState.items, ...hits],
           page: prevState.page + 1,
         }))
-      )
-      .finally(() => {
-        this.setState({ loading: false });
         e.target.style.display = 'block';
-      });
+      // .finally(() => {
+      //   this.setState({ loading: false });
+      //   e.target.style.display = 'block';
+      // });
   };
   handleSubmitImg = query => {
     this.setState({
