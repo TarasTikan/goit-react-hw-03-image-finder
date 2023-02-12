@@ -12,7 +12,10 @@ export function ImageGallery({ items }) {
   );
 }
 ImageGallery.propTypes = {
-  items: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-  }).isRequired,
+  items:  PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    }),
+  ).isRequired
 };
+
