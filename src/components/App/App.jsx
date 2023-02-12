@@ -4,7 +4,7 @@ import { ImageGallery } from '../ImageGallery/ImageGallery';
 import { Apps } from './App.styled';
 import { Button } from 'components/Button/Button';
 import { Loader } from 'components/Loader/Loader';
-import { FetchImg } from 'components/FetchImg/FetchImg';
+import { FetchImg } from 'FetchImg/FetchImg';
 export class App extends Component {
   state = {
     page: 1,
