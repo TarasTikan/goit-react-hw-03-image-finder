@@ -46,10 +46,9 @@ export class App extends Component {
     return (
       <Apps>
         <Searchbar page={page} query={query} onSubmit={this.handleSubmitImg} />
-        <ImageGallery
-          items={items}
-          handleModal={this.toggleModal}
-        ></ImageGallery>
+        {items.length !== 0 && (
+          <ImageGallery items={items} handleModal={this.toggleModal} />
+        )}
         {loading && <Loader />}
         {items.length !== 0 && <Button onClick={this.handleLoadMoreBtn} />}
       </Apps>
