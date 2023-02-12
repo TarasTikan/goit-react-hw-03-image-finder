@@ -33,7 +33,7 @@ export const SearchButton = styled.button`
   width: 48px;
   height: 48px;
   border: 0;
-  background-image: url('https://cdn.icon-icons.com/icons2/621/PNG/512/magnifier-1_icon-icons.com_56924.png');
+  background-image: url('https://cdn-icons-png.flaticon.com/512/149/149852.png');
   background-size: 40%;
   background-repeat: no-repeat;
   background-position: center;
