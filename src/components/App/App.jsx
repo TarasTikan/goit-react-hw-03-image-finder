@@ -13,11 +13,8 @@ export class App extends Component {
     loading: false,
   };
   componentDidUpdate(prevProps, prevState) {
-    const {query, page} = this.state
-    if (
-      prevState.query !== query ||
-      prevState.page !== page
-    ) {
+    const { query, page } = this.state;
+    if (prevState.query !== query || prevState.page !== page) {
       this.setState({ loading: true });
 
       FetchImg(query, page)
@@ -45,22 +42,16 @@ export class App extends Component {
   };
 
   render() {
-    const {page, query, items, loading} = this.state
+    const { page, query, items, loading } = this.state;
     return (
       <Apps>
-        <Searchbar
-          page={page}
-          query={query}
-          onSubmit={this.handleSubmitImg}
-        />
+        <Searchbar page={page} query={query} onSubmit={this.handleSubmitImg} />
         <ImageGallery
           items={items}
           handleModal={this.toggleModal}
         ></ImageGallery>
         {loading && <Loader />}
-        {items.length !== 0 && (
-          <Button onClick={this.handleLoadMoreBtn} />
-        )}
+        {items.length !== 0 && <Button onClick={this.handleLoadMoreBtn} />}
       </Apps>
     );
   }
