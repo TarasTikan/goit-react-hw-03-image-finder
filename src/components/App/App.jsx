@@ -11,6 +11,7 @@ export class App extends Component {
     query: '',
     items: [],
     loading: false,
+    visibleLoadMore: false
   };
   componentDidUpdate(prevProps, prevState) {
     const { query, page } = this.state;
@@ -23,7 +24,7 @@ export class App extends Component {
             items: [...prevState.items, ...hits],
           }))
         )
-        .finally(() => this.setState({ loading: false }));
+        .finally(() => this.setState({ loading: false, visibleLoadMore: true }));
     }
   }
 
@@ -31,6 +32,7 @@ export class App extends Component {
     this.setState(prevState => ({
       page: prevState.page + 1,
       loading: true,
+      visibleLoadMore: false
     }));
   };
   handleSubmitImg = query => {
@@ -42,7 +44,7 @@ export class App extends Component {
   };
 
   render() {
-    const { page, query, items, loading } = this.state;
+    const { page, query, items, loading, visibleLoadMore } = this.state;
     return (
       <Apps>
         <Searchbar page={page} query={query} onSubmit={this.handleSubmitImg} />
@@ -50,7 +52,7 @@ export class App extends Component {
           <ImageGallery items={items} handleModal={this.toggleModal} />
         )}
         {loading && <Loader />}
-        {items.length !== 0 && <Button onClick={this.handleLoadMoreBtn} />}
+        {visibleLoadMore && <Button onClick={this.handleLoadMoreBtn} />}
       </Apps>
     );
   }
