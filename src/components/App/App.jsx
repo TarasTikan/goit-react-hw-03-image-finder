@@ -11,7 +11,7 @@ export class App extends Component {
     query: '',
     items: [],
     loading: false,
-    visibleLoadMore: false
+    visibleLoadMore: false,
   };
   componentDidUpdate(prevProps, prevState) {
     const { query, page } = this.state;
@@ -24,7 +24,9 @@ export class App extends Component {
             items: [...prevState.items, ...hits],
           }))
         )
-        .finally(() => this.setState({ loading: false, visibleLoadMore: true }));
+        .finally(() =>
+          this.setState({ loading: false, visibleLoadMore: true })
+        );
     }
   }
 
@@ -32,7 +34,7 @@ export class App extends Component {
     this.setState(prevState => ({
       page: prevState.page + 1,
       loading: true,
-      visibleLoadMore: false
+      visibleLoadMore: false,
     }));
   };
   handleSubmitImg = query => {
