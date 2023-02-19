@@ -2,7 +2,7 @@ import { ModalImg, Overlay } from './Modal.styled';
 import PropTypes from 'prop-types';
 // import { Component } from 'react';
 import { createPortal } from 'react-dom';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 const ModalRoot = document.querySelector('#ModalRoot');
 export function Modal({ imgModal, onClose }) {
   useEffect(() => {
